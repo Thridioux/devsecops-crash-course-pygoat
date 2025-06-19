@@ -2,6 +2,9 @@ name: CI
 
 on: [push]
 
+permissions:
+  contents: read
+
 jobs:
   sast_scan: # static application security testing
     name: Run Bandit Scan
@@ -54,8 +57,16 @@ jobs:
         sarif-file: scout-report.sarif
 
     - name: Debug List Files
+      run: ls -la
+
+    - name: Debug Check scout-report.sarif content
       run: |
-        ls -la
+        if [ -f scout-report.sarif ]; then
+          echo "scout-report.sarif found."
+          cat scout-report.sarif
+        else
+          echo "scout-report.sarif not found."
+        fi
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
