@@ -44,8 +44,12 @@ jobs:
     - name: Set up Docker
       uses: docker-practice/actions-setup-docker@v1
 
+    - name: Create daemon.json
+      run: |
+        echo '{}' | sudo tee /etc/docker/daemon.json
+
     - name: Build Docker Image
-      run: sudo docker build -f Dockerfile -t myapp:latest .
+      run: docker build -f Dockerfile -t myapp:latest .
 
     - name: Docker Scout Scan
       uses: docker/scout-action@v1.0.9
