@@ -23,7 +23,7 @@ jobs:
      run: bandit -ll -ii -r . -f json -o bandit-report.json
 
    - name: Upload Artifact
-     uses: actions/upload-artifact@v3  #always upload the artifact even if the job fails
+     uses: actions/upload-artifact@v4  #always upload the artifact even if the job fails
      # This action uploads artifacts from your workflow to GitHub, so you can access them later
      if: always()    
      with:
